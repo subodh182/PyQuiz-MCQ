@@ -45,7 +45,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
 .hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:blink 1.2s ease infinite}
 .hero h1{font-size:clamp(2.8rem,7vw,5rem);font-weight:900;line-height:1;letter-spacing:-.04em;margin-bottom:1rem}
 .grad{background:linear-gradient(135deg,var(--cyan) 0%,var(--blue) 40%,var(--purple) 70%,var(--pink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{color:var(--text2);font-size:1.1rem;font-weight:400;max-width:520px;margin:0 auto 2.5rem;line-height:1.6}
+.hero p{color:var(--text2);font-size:1.1rem;max-width:520px;margin:0 auto 2.5rem;line-height:1.6}
 .stats-row{display:flex;justify-content:center;gap:2.5rem;margin-bottom:4rem;flex-wrap:wrap}
 .stat{text-align:center}
 .stat-num{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
@@ -56,7 +56,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
 .topic-card{background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1rem;cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
 .topic-card:hover{border-color:var(--border2);transform:translateY(-2px)}
 [data-theme="light"] .topic-card{box-shadow:0 2px 12px rgba(79,110,247,.07)}
-[data-theme="light"] .topic-card:hover{box-shadow:0 6px 24px rgba(79,110,247,.14)}
 .topic-card.selected{border-color:var(--cyan);background:rgba(79,110,247,.06)}
 .topic-icon{font-size:1.6rem;margin-bottom:.5rem}
 .topic-name{font-size:.82rem;font-weight:700;margin-bottom:.2rem}
@@ -79,7 +78,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
 .slider{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:100px;background:var(--border);outline:none;cursor:pointer}
 .slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 2px 12px rgba(79,110,247,.6);cursor:pointer;transition:transform .15s}
 .slider::-webkit-slider-thumb:hover{transform:scale(1.15)}
-.gen-btn{width:100%;padding:1.1rem;border-radius:14px;border:none;background:linear-gradient(135deg,var(--blue),var(--purple),var(--pink));color:#fff;font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer;letter-spacing:.02em;box-shadow:0 8px 32px rgba(79,110,247,.4);transition:all .2s cubic-bezier(.4,0,.2,1);margin-bottom:2rem;position:relative;overflow:hidden}
+.gen-btn{width:100%;padding:1.1rem;border-radius:14px;border:none;background:linear-gradient(135deg,var(--blue),var(--purple),var(--pink));color:#fff;font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;cursor:pointer;letter-spacing:.02em;box-shadow:0 8px 32px rgba(79,110,247,.4);transition:all .2s cubic-bezier(.4,0,.2,1);margin-bottom:2rem}
 .gen-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(79,110,247,.55)}
 .gen-btn:active{transform:translateY(-1px)}
 .gen-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
@@ -98,8 +97,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
 .error-box.show{display:flex;align-items:center;gap:.6rem;animation:fadeUp .3s ease}
 #quiz-panel{display:none}
 #quiz-panel.show{display:block;animation:fadeUp .4s ease}
-.quiz-topbar{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1rem 1.4rem;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;transition:background .3s}
-[data-theme="light"] .quiz-topbar{box-shadow:0 2px 12px rgba(79,110,247,.07)}
+.quiz-topbar{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:1rem 1.4rem;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem}
 .quiz-info{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
 .quiz-tag{display:flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600}
 .quiz-tag-dot{width:8px;height:8px;border-radius:50%}
@@ -126,10 +124,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.2rem
 .opt-btn:disabled{cursor:default;transform:none}
 .exp-box{display:none;margin-top:1rem;padding:.9rem 1.1rem;background:rgba(79,110,247,.05);border:1.5px solid rgba(79,110,247,.2);border-radius:10px;font-size:.85rem;color:var(--cyan);line-height:1.55}
 .exp-box.show{display:flex;gap:.6rem;animation:fadeUp .25s ease}
-.results{display:none;background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:3rem 2rem;text-align:center;margin-top:2rem;transition:background .3s}
+.results{display:none;background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:3rem 2rem;text-align:center;margin-top:2rem}
 [data-theme="light"] .results{box-shadow:0 4px 32px rgba(79,110,247,.1)}
 .results.show{display:block;animation:fadeUp .5s ease}
-.results-circle{width:120px;height:120px;border-radius:50%;margin:0 auto 1.5rem;position:relative;display:flex;align-items:center;justify-content:center}
+.results-circle{width:120px;height:120px;margin:0 auto 1.5rem;position:relative;display:flex;align-items:center;justify-content:center}
 .results-circle svg{position:absolute;inset:0;transform:rotate(-90deg)}
 .results-circle-inner{font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--cyan),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;z-index:1}
 .results-title{font-size:1.5rem;font-weight:800;margin-bottom:.4rem}
@@ -175,6 +173,7 @@ footer span{color:var(--blue)}
     </button>
   </div>
 </nav>
+
 <div class="hero">
   <div class="hero-tag">AI-Powered Learning</div>
   <h1>Master Python<br><span class="grad">One Quiz at a Time</span></h1>
@@ -186,28 +185,17 @@ footer span{color:var(--blue)}
     <div class="stat"><div class="stat-num">&lt;2s</div><div class="stat-label">Speed</div></div>
   </div>
 </div>
+
 <div class="main">
   <div class="section-label">01 — Choose a topic</div>
-  <div class="topic-grid" id="topic-grid">
-    {% for t in topics %}
-    <div class="topic-card" data-id="{{ t.id }}" onclick="selectTopic('{{ t.id }}',this)">
-      <div class="topic-check">&#10003;</div>
-      <div class="topic-icon">{{ t.icon }}</div>
-      <div class="topic-name">{{ t.label }}</div>
-      <div class="topic-desc">{{ t.desc }}</div>
-    </div>
-    {% endfor %}
-  </div>
+  <!-- Topics injected by JS -->
+  <div class="topic-grid" id="topic-grid"></div>
+
   <div class="section-label">02 — Configure your quiz</div>
   <div class="config-row">
     <div class="config-box">
       <div class="config-box-title">Difficulty Level</div>
-      <div class="diff-pills">
-        {% for d in difficulties %}
-        <button class="diff-pill {% if d.id == 'medium' %}sel-medium{% endif %}"
-          data-diff="{{ d.id }}" onclick="selectDiff('{{ d.id }}',this)">{{ d.label }}</button>
-        {% endfor %}
-      </div>
+      <div class="diff-pills" id="diff-pills"></div>
     </div>
     <div class="config-box">
       <div class="config-box-title">Number of Questions</div>
@@ -217,33 +205,27 @@ footer span{color:var(--blue)}
       </div>
     </div>
   </div>
+
   <button class="gen-btn" id="gen-btn" onclick="generateQuiz()">
-    <div class="btn-inner"><span>&#9889;</span><span>Generate Quiz</span></div>
+    <div class="btn-inner"><span>⚡</span><span>Generate Quiz</span></div>
   </button>
-  <div class="error-box" id="error-box"><span>&#10007;</span><span id="error-text"></span></div>
+
+  <div class="error-box" id="error-box"><span>✗</span><span id="error-text"></span></div>
   <div class="loader" id="loader">
     <div class="loader-ring"></div>
-    <div class="loader-dots">
-      <div class="loader-dot"></div><div class="loader-dot"></div><div class="loader-dot"></div>
-    </div>
+    <div class="loader-dots"><div class="loader-dot"></div><div class="loader-dot"></div><div class="loader-dot"></div></div>
     <div class="loader-text" id="loader-text">Generating your quiz...</div>
   </div>
+
   <div id="quiz-panel">
     <div class="quiz-topbar">
       <div class="quiz-info">
-        <div class="quiz-tag">
-          <div class="quiz-tag-dot" id="diff-dot"></div>
-          <span id="quiz-diff-label"></span>
-        </div>
+        <div class="quiz-tag"><div class="quiz-tag-dot" id="diff-dot"></div><span id="quiz-diff-label"></span></div>
         <div class="quiz-tag" style="color:var(--text2)"><span id="quiz-topic-label"></span></div>
       </div>
       <div class="quiz-progress-wrap">
-        <div class="quiz-progress-label">
-          <span>Progress</span><span id="progress-text">0 / 0</span>
-        </div>
-        <div class="quiz-progress-bar">
-          <div class="quiz-progress-fill" id="progress-fill"></div>
-        </div>
+        <div class="quiz-progress-label"><span>Progress</span><span id="progress-text">0 / 0</span></div>
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progress-fill"></div></div>
       </div>
       <div class="quiz-score-badge">Score: <span id="live-score">0</span> / <span id="live-total">0</span></div>
     </div>
@@ -252,14 +234,8 @@ footer span{color:var(--blue)}
       <div class="results-circle">
         <svg viewBox="0 0 120 120" width="120" height="120">
           <circle cx="60" cy="60" r="52" fill="none" stroke="var(--border)" stroke-width="6"/>
-          <circle cx="60" cy="60" r="52" fill="none" stroke="url(#rg)" stroke-width="6"
-            stroke-linecap="round" id="result-arc" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
-          <defs>
-            <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="var(--blue)"/>
-              <stop offset="100%" stop-color="var(--cyan)"/>
-            </linearGradient>
-          </defs>
+          <circle cx="60" cy="60" r="52" fill="none" stroke="url(#rg)" stroke-width="6" stroke-linecap="round" id="result-arc" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+          <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="var(--blue)"/><stop offset="100%" stop-color="var(--cyan)"/></linearGradient></defs>
         </svg>
         <div class="results-circle-inner" id="result-pct">0%</div>
       </div>
@@ -271,42 +247,87 @@ footer span{color:var(--blue)}
         <div class="r-stat"><div class="r-stat-num" style="color:var(--cyan)" id="r-pct">0%</div><div class="r-stat-label">Score</div></div>
       </div>
       <div class="results-btns">
-        <button class="btn-retry" onclick="retryQuiz()">Retry Same Quiz</button>
-        <button class="btn-new" onclick="newQuiz()">New Quiz</button>
+        <button class="btn-retry" onclick="retryQuiz()">🔁 Retry Same Quiz</button>
+        <button class="btn-new" onclick="newQuiz()">✨ New Quiz</button>
       </div>
     </div>
   </div>
 </div>
-<footer>Built with <span>Flask</span> + <span>Groq</span> + <span>Llama 3.3 70B</span> &middot; PyQuiz AI</footer>
+<footer>Built with <span>Flask</span> + <span>Groq</span> + <span>Llama 3.3 70B</span> · PyQuiz AI</footer>
 </div>
+
 <script>
-let selectedTopic=null,selectedDiff='medium',score=0,answered=0,total=0,currentQuestions=[];
+// ── DATA (No Jinja2 — pure JS) ──
+var TOPICS = [
+  {id:'oops',       label:'OOPs & Classes',        icon:'🧬', desc:'Inheritance, Polymorphism, Encapsulation'},
+  {id:'functions',  label:'Functions & Lambdas',   icon:'⚡', desc:'Args, Decorators, Closures'},
+  {id:'dsa',        label:'Data Structures',       icon:'🗂️', desc:'Lists, Dicts, Sets, Tuples'},
+  {id:'exceptions', label:'Exception Handling',    icon:'🛡️', desc:'Try/Except, Custom Errors'},
+  {id:'generators', label:'Generators & Iterators',icon:'♾️', desc:'Yield, Lazy Evaluation'},
+  {id:'fileio',     label:'File I/O & OS',         icon:'📁', desc:'Read, Write, Path operations'},
+  {id:'regex',      label:'Regex & Strings',       icon:'🔍', desc:'Pattern matching, String methods'},
+  {id:'modules',    label:'Modules & Packages',    icon:'📦', desc:'Import, __init__, pip packages'}
+];
+
+var DIFFICULTIES = [
+  {id:'easy',   label:'Easy'},
+  {id:'medium', label:'Medium'},
+  {id:'hard',   label:'Hard'}
+];
+
+// ── INIT ──
+var selectedTopic=null, selectedDiff='medium', score=0, answered=0, total=0, currentQuestions=[];
+
+// Render topics
+var grid = document.getElementById('topic-grid');
+TOPICS.forEach(function(t){
+  var d = document.createElement('div');
+  d.className = 'topic-card';
+  d.setAttribute('data-id', t.id);
+  d.onclick = function(){ selectTopic(t.id, d); };
+  d.innerHTML = '<div class="topic-check">&#10003;</div><div class="topic-icon">'+t.icon+'</div><div class="topic-name">'+t.label+'</div><div class="topic-desc">'+t.desc+'</div>';
+  grid.appendChild(d);
+});
+
+// Render difficulty pills
+var pillsDiv = document.getElementById('diff-pills');
+DIFFICULTIES.forEach(function(d){
+  var btn = document.createElement('button');
+  btn.className = 'diff-pill' + (d.id==='medium' ? ' sel-medium' : '');
+  btn.textContent = d.label;
+  btn.onclick = function(){ selectDiff(d.id, btn); };
+  pillsDiv.appendChild(btn);
+});
+
+// ── THEME ──
 function toggleTheme(){
-  const html=document.documentElement;
-  const thumb=document.getElementById('toggle-thumb');
-  const isDark=html.getAttribute('data-theme')==='dark';
-  html.setAttribute('data-theme',isDark?'light':'dark');
-  thumb.textContent=isDark?'☀️':'🌙';
-  localStorage.setItem('pyquiz-theme',isDark?'light':'dark');
+  var html = document.documentElement;
+  var thumb = document.getElementById('toggle-thumb');
+  var isDark = html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme', isDark?'light':'dark');
+  thumb.textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('pyquiz-theme', isDark?'light':'dark');
 }
 (function(){
-  const saved=localStorage.getItem('pyquiz-theme')||'dark';
-  document.documentElement.setAttribute('data-theme',saved);
-  document.getElementById('toggle-thumb').textContent=saved==='dark'?'🌙':'☀️';
+  var saved = localStorage.getItem('pyquiz-theme')||'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.getElementById('toggle-thumb').textContent = saved==='dark'?'🌙':'☀️';
 })();
+
+// ── CANVAS ──
 (function(){
-  const c=document.getElementById('bg-canvas'),ctx=c.getContext('2d');
-  let W,H,particles=[];
+  var c=document.getElementById('bg-canvas'), ctx=c.getContext('2d');
+  var W,H,particles=[];
   function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}
-  function init(){particles=[];for(let i=0;i<60;i++)particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.5,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,hue:Math.random()*60+200,alpha:Math.random()*.6+.2})}
+  function init(){particles=[];for(var i=0;i<60;i++)particles.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.5+.5,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,hue:Math.random()*60+200,alpha:Math.random()*.6+.2})}
   function draw(){
     ctx.clearRect(0,0,W,H);
-    [{x:W*.15,y:H*.1,r:300,c:'rgba(79,110,247,'},{x:W*.85,y:H*.7,r:250,c:'rgba(155,89,245,'},{x:W*.5,y:H*.4,r:200,c:'rgba(0,229,255,'}].forEach(b=>{
-      const g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
+    [{x:W*.15,y:H*.1,r:300,c:'rgba(79,110,247,'},{x:W*.85,y:H*.7,r:250,c:'rgba(155,89,245,'},{x:W*.5,y:H*.4,r:200,c:'rgba(0,229,255,'}].forEach(function(b){
+      var g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
       g.addColorStop(0,b.c+'0.08)');g.addColorStop(1,b.c+'0)');
       ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
     });
-    particles.forEach(p=>{
+    particles.forEach(function(p){
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fillStyle='hsla('+p.hue+',80%,70%,'+p.alpha+')';ctx.fill();
       p.x+=p.vx;p.y+=p.vy;
@@ -317,6 +338,7 @@ function toggleTheme(){
   resize();init();draw();
   window.addEventListener('resize',function(){resize();init()});
 })();
+
 function updateSlider(v){
   document.getElementById('slider-val').textContent=v;
   var pct=((v-3)/(15-3))*100;
@@ -334,8 +356,7 @@ async function generateQuiz(){
   document.getElementById('error-box').classList.remove('show');
   if(!selectedTopic){showError('Please select a topic first!');return}
   var numQ=parseInt(document.getElementById('q-slider').value);
-  var btn=document.getElementById('gen-btn');
-  var loader=document.getElementById('loader');
+  var btn=document.getElementById('gen-btn'), loader=document.getElementById('loader');
   btn.disabled=true;loader.classList.add('show');
   document.getElementById('quiz-panel').style.display='none';
   document.getElementById('results').classList.remove('show');
@@ -353,15 +374,12 @@ async function generateQuiz(){
   }catch(e){clearInterval(iv);showError(e.message)}
   finally{loader.classList.remove('show');btn.disabled=false}
 }
-function showError(msg){
-  document.getElementById('error-text').textContent=msg;
-  document.getElementById('error-box').classList.add('show');
-}
+function showError(msg){document.getElementById('error-text').textContent=msg;document.getElementById('error-box').classList.add('show')}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function renderQuiz(questions,topic,diff){
   total=questions.length;
-  var diffColors={easy:'#4ade80',medium:'#fb923c',hard:'#f87171'};
-  document.getElementById('diff-dot').style.background=diffColors[diff]||'#fb923c';
+  var dc={easy:'#4ade80',medium:'#fb923c',hard:'#f87171'};
+  document.getElementById('diff-dot').style.background=dc[diff]||'#fb923c';
   document.getElementById('quiz-diff-label').textContent=diff.charAt(0).toUpperCase()+diff.slice(1);
   document.getElementById('quiz-topic-label').textContent=topic;
   document.getElementById('live-score').textContent='0';
@@ -372,12 +390,12 @@ function renderQuiz(questions,topic,diff){
   container.innerHTML='';
   questions.forEach(function(q,i){
     var card=document.createElement('div');
-    card.className='q-card';card.style.animationDelay=(i*0.07)+'s';card.id='q-'+i;
+    card.className='q-card';card.style.animationDelay=(i*0.07)+'s';
     var codeHtml=q.code&&q.code.trim()?'<div class="code-block">'+esc(q.code)+'</div>':'';
     var optsHtml=Object.entries(q.options).map(function(e){
       return '<button class="opt-btn" onclick="answer('+i+',\''+e[0]+'\',\''+q.answer+'\')"><span class="opt-lbl">'+e[0]+'</span><span>'+esc(e[1])+'</span></button>';
     }).join('');
-    card.innerHTML='<div class="q-num">Question '+(i+1)+' of '+total+'</div><div class="q-text">'+esc(q.question)+'</div>'+codeHtml+'<div class="opts" id="opts-'+i+'">'+optsHtml+'</div><div class="exp-box" id="exp-'+i+'"><span>&#128161;</span><span>'+esc(q.explanation||'')+'</span></div>';
+    card.innerHTML='<div class="q-num">Question '+(i+1)+' of '+total+'</div><div class="q-text">'+esc(q.question)+'</div>'+codeHtml+'<div class="opts" id="opts-'+i+'">'+optsHtml+'</div><div class="exp-box" id="exp-'+i+'"><span>💡</span><span>'+esc(q.explanation||'')+'</span></div>';
     container.appendChild(card);
   });
   var panel=document.getElementById('quiz-panel');
