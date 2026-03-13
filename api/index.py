@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, jsonify
 from groq import Groq
+from dotenv import load_dotenv
 import json, re, os
 
 app = Flask(__name__, template_folder='../templates')
 
+load_dotenv()
 API_KEY = os.environ.get('GROQ_API_KEY')
-client = Groq(api_key=API_KEY)
+client = Groq(api_key=API_KEY) if API_KEY else None
 
 TOPICS = [
     {"id": "oops",       "label": "OOPs & Classes",         "icon": "🧬", "desc": "Inheritance, Polymorphism, Encapsulation"},
@@ -23,7 +25,14 @@ def index():
     return render_template('index.html')
 
 @app.route('/generate', methods=['POST'])
+@app.route('/api/generate', methods=['POST'])
 def generate():
+    if client is None:
+        return jsonify({
+            "success": False,
+            "error": "GROQ_API_KEY is missing. Set it in environment or .env file."
+        }), 500
+
     data = request.get_json(force=True)
     topic_id      = data.get('topic', 'oops')
     difficulty    = data.get('difficulty', 'medium')
@@ -63,3 +72,6 @@ Return ONLY a valid JSON array. No markdown, no explanation, just raw JSON:
 
 # Required for Vercel
 app.debug = False
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
