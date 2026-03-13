@@ -5,7 +5,7 @@
     { "src": "api/generate.py", "use": "@vercel/python" }
   ],
   "routes": [
-    { "src": "/generate", "dest": "/api/generate.py" },
-    { "src": "/(.*)",     "dest": "/api/index.py"    }
+    { "src": "/api/generate", "dest": "/api/generate.py" },
+    { "src": "/(.*)",         "dest": "/api/index.py"    }
   ]
 }
