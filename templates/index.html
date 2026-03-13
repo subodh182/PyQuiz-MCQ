@@ -441,7 +441,7 @@ async function generateQuiz(){
   var msgs=['Crafting your questions...','Summoning Llama 3.3...','Generating distractors...','Almost there...'];
   var mi=0,iv=setInterval(function(){document.getElementById('loader-text').textContent=msgs[mi++%msgs.length]},900);
   try{
-    var res=await fetch('/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:selectedTopic,difficulty:selectedDiff,num_questions:numQ})});
+    var res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:selectedTopic,difficulty:selectedDiff,num_questions:numQ})});
     var data=await res.json();clearInterval(iv);
     if(!data.success)throw new Error(data.error||'Failed');
     currentQuestions=data.questions;renderQuiz(data.questions,data.topic,data.difficulty);
@@ -529,3 +529,4 @@ updateSlider(5);
 </script>
 </body>
 </html>
+
