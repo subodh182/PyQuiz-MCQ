@@ -1,38 +1,42 @@
-from flask import Flask, request, jsonify
+from http.server import BaseHTTPRequestHandler
 from groq import Groq
 import json, re, os
 
-app = Flask(__name__)
+TOPICS = {
+    "oops":       "OOPs & Classes",
+    "functions":  "Functions & Lambdas",
+    "dsa":        "Data Structures",
+    "exceptions": "Exception Handling",
+    "generators": "Generators & Iterators",
+    "fileio":     "File I/O & OS",
+    "regex":      "Regex & Strings",
+    "modules":    "Modules & Packages",
+}
 
-TOPICS = [
-    {"id": "oops",       "label": "OOPs & Classes"},
-    {"id": "functions",  "label": "Functions & Lambdas"},
-    {"id": "dsa",        "label": "Data Structures"},
-    {"id": "exceptions", "label": "Exception Handling"},
-    {"id": "generators", "label": "Generators & Iterators"},
-    {"id": "fileio",     "label": "File I/O & OS"},
-    {"id": "regex",      "label": "Regex & Strings"},
-    {"id": "modules",    "label": "Modules & Packages"},
-]
+class handler(BaseHTTPRequestHandler):
 
-@app.route('/api/generate', methods=['POST'])
-def generate():
-    try:
-        data          = request.get_json(force=True, silent=True) or {}
-        topic_id      = data.get('topic', 'oops')
-        difficulty    = data.get('difficulty', 'medium')
-        num_questions = min(int(data.get('num_questions', 5)), 15)
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
 
-        topic_obj   = next((t for t in TOPICS if t['id'] == topic_id), TOPICS[0])
-        topic_label = topic_obj['label']
+    def do_POST(self):
+        try:
+            length  = int(self.headers.get('Content-Length', 0))
+            body    = self.rfile.read(length)
+            data    = json.loads(body)
 
-        api_key = os.environ.get('GROQ_API_KEY')
-        if not api_key:
-            return jsonify({"success": False, "error": "API key not set"}), 500
+            topic_id      = data.get('topic', 'oops')
+            difficulty    = data.get('difficulty', 'medium')
+            num_questions = min(int(data.get('num_questions', 5)), 15)
+            topic_label   = TOPICS.get(topic_id, 'OOPs & Classes')
 
-        client = Groq(api_key=api_key)
+            api_key = os.environ.get('GROQ_API_KEY')
+            client  = Groq(api_key=api_key)
 
-        prompt = f"""Generate exactly {num_questions} {difficulty}-level MCQ questions on Python topic: {topic_label}.
+            prompt = f"""Generate exactly {num_questions} {difficulty}-level MCQ questions on Python topic: {topic_label}.
 Return ONLY a valid JSON array, no markdown, no extra text:
 [
   {{
@@ -44,18 +48,27 @@ Return ONLY a valid JSON array, no markdown, no extra text:
   }}
 ]"""
 
-        chat_completion = client.chat.completions.create(
-            messages=[{"role": "user", "content": prompt}],
-            model="llama-3.3-70b-versatile",
-            temperature=0.7,
-        )
-        raw   = chat_completion.choices[0].message.content.strip()
-        match = re.search(r'\[.*\]', raw, re.DOTALL)
-        if match:
-            questions = json.loads(match.group())
-            return jsonify({"success": True, "questions": questions, "topic": topic_label, "difficulty": difficulty})
-        else:
-            return jsonify({"success": False, "error": "Could not parse response"}), 500
+            chat = client.chat.completions.create(
+                messages=[{"role": "user", "content": prompt}],
+                model="llama-3.3-70b-versatile",
+                temperature=0.7,
+            )
+            raw   = chat.choices[0].message.content.strip()
+            match = re.search(r'\[.*\]', raw, re.DOTALL)
 
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+            if match:
+                questions = json.loads(match.group())
+                result = {"success": True, "questions": questions, "topic": topic_label, "difficulty": difficulty}
+            else:
+                result = {"success": False, "error": "Could not parse AI response"}
+
+        except Exception as e:
+            result = {"success": False, "error": str(e)}
+
+        response = json.dumps(result).encode()
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-Length', str(len(response)))
+        self.end_headers()
+        self.wfile.write(response)
