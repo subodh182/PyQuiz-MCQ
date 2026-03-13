@@ -1,13 +1,11 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "api/index.py",
-      "use": "@vercel/python"
-    }
+    { "src": "api/index.py",    "use": "@vercel/python" },
+    { "src": "api/generate.py", "use": "@vercel/python" }
   ],
-  "rewrites": [
-    { "source": "/generate", "destination": "/api/index.py" },
-    { "source": "/(.*)",     "destination": "/api/index.py" }
+  "routes": [
+    { "src": "/generate", "dest": "/api/generate.py" },
+    { "src": "/(.*)",     "dest": "/api/index.py"    }
   ]
 }
