@@ -31,7 +31,7 @@ DIFFICULTIES = [
 def index():
     return render_template('index.html')
 
-@app.route('/generate', methods=['POST'])
+@app.route('/api/generate', methods=['POST'])
 def generate():
     data = request.json
     topic_id    = data.get('topic', 'oops')
