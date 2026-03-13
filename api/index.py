@@ -1,41 +1,32 @@
 from flask import Flask, render_template, request, jsonify
 from groq import Groq
-from dotenv import load_dotenv
 import json, re, os
-
-load_dotenv()
 
 app = Flask(__name__, template_folder='../templates')
 
-API_KEY = os.getenv('GROQ_API_KEY')
+API_KEY = os.environ.get('GROQ_API_KEY')
 client = Groq(api_key=API_KEY)
 
 TOPICS = [
-    {"id": "oops",       "label": "OOPs & Classes",        "icon": "🧬", "desc": "Inheritance, Polymorphism, Encapsulation"},
-    {"id": "functions",  "label": "Functions & Lambdas",   "icon": "⚡", "desc": "Args, Decorators, Closures"},
-    {"id": "dsa",        "label": "Data Structures",       "icon": "🗂️", "desc": "Lists, Dicts, Sets, Tuples"},
-    {"id": "exceptions", "label": "Exception Handling",    "icon": "🛡️", "desc": "Try/Except, Custom Errors"},
-    {"id": "generators", "label": "Generators & Iterators","icon": "♾️", "desc": "Yield, Lazy Evaluation"},
-    {"id": "fileio",     "label": "File I/O & OS",         "icon": "📁", "desc": "Read, Write, Path operations"},
-    {"id": "regex",      "label": "Regex & Strings",       "icon": "🔍", "desc": "Pattern matching, String methods"},
-    {"id": "modules",    "label": "Modules & Packages",    "icon": "📦", "desc": "Import, __init__, pip packages"},
+    {"id": "oops",       "label": "OOPs & Classes",         "icon": "🧬", "desc": "Inheritance, Polymorphism, Encapsulation"},
+    {"id": "functions",  "label": "Functions & Lambdas",    "icon": "⚡", "desc": "Args, Decorators, Closures"},
+    {"id": "dsa",        "label": "Data Structures",        "icon": "🗂️", "desc": "Lists, Dicts, Sets, Tuples"},
+    {"id": "exceptions", "label": "Exception Handling",     "icon": "🛡️", "desc": "Try/Except, Custom Errors"},
+    {"id": "generators", "label": "Generators & Iterators", "icon": "♾️", "desc": "Yield, Lazy Evaluation"},
+    {"id": "fileio",     "label": "File I/O & OS",          "icon": "📁", "desc": "Read, Write, Path operations"},
+    {"id": "regex",      "label": "Regex & Strings",        "icon": "🔍", "desc": "Pattern matching, String methods"},
+    {"id": "modules",    "label": "Modules & Packages",     "icon": "📦", "desc": "Import, __init__, pip packages"},
 ]
 
-DIFFICULTIES = [
-    {"id": "easy",   "label": "Easy"},
-    {"id": "medium", "label": "Medium"},
-    {"id": "hard",   "label": "Hard"},
-]
-
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/api/generate', methods=['POST'])
+@app.route('/generate', methods=['POST'])
 def generate():
-    data = request.json
-    topic_id    = data.get('topic', 'oops')
-    difficulty  = data.get('difficulty', 'medium')
+    data = request.get_json(force=True)
+    topic_id      = data.get('topic', 'oops')
+    difficulty    = data.get('difficulty', 'medium')
     num_questions = min(int(data.get('num_questions', 5)), 15)
 
     topic_obj   = next((t for t in TOPICS if t['id'] == topic_id), TOPICS[0])
@@ -52,13 +43,7 @@ Return ONLY a valid JSON array. No markdown, no explanation, just raw JSON:
     "answer": "A",
     "explanation": "Why A is correct."
   }}
-]
-
-Rules:
-- Include a short code snippet in "code" field when relevant (Python code), else leave as ""
-- Make distractors plausible
-- Vary question styles
-"""
+]"""
 
     try:
         chat_completion = client.chat.completions.create(
@@ -76,5 +61,5 @@ Rules:
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+# Required for Vercel
+app.debug = False
